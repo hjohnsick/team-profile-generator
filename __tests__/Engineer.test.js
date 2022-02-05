@@ -13,9 +13,9 @@ describe('Engineer', () => {
     describe('getRole', () => {
         it('should get the engineer role', () => {
             const engineer = new Engineer('Henry', 1, 'henry@gmail.com', 'henry');
-            const github = engineer.getRole();
+            const role = engineer.getRole();
 
-            expect(github).toEqual("Engineer");
+            expect(role).toEqual("Engineer");
         });
     });
 })
