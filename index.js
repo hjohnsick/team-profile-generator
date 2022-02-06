@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const Intern = require("./lib/Intern.js");
-const Engineer = require("./lib/Engineer");
+const Engineer = require("./lib/Engineer.js");
+const Manager = require("./lib/Manager.js");
 
 const engineerPrompt = () => {
   return inquirer.prompt([
@@ -11,7 +12,7 @@ const engineerPrompt = () => {
     },
     {
       type: "input",
-      name: "ID",
+      name: "Id",
       message: "Enter the engineer's ID:",
     },
     {
@@ -42,7 +43,7 @@ const internPrompt = () => {
     },
     {
       type: "input",
-      name: "ID",
+      name: "Id",
       message: "Enter the intern's ID:",
     },
     {
@@ -80,7 +81,7 @@ const employeePrompt = () => {
     ])
     .then(({ choice }) => {
       if (choice === "Add an intern") {
-        internPrompt()
+        return internPrompt()
         .then((internData) => {
             console.log(internData);
             if (internData.addMember) {
@@ -88,7 +89,7 @@ const employeePrompt = () => {
             }
         });
       } else if (choice === "Add an engineer") {
-        engineerPrompt()
+        return engineerPrompt()
         .then((internData) => {
             console.log(internData);
             if (internData.addMember) {
@@ -127,7 +128,7 @@ const startApplication = () => {
       },
     ])
     .then(() => {
-      employeePrompt();
+      return employeePrompt();
     });
 };
 
