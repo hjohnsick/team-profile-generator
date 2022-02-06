@@ -14,7 +14,7 @@ const engineerPrompt = () => {
     },
     {
       type: "input",
-      name: "Id",
+      name: "id",
       message: "Enter the engineer's ID:",
     },
     {
@@ -45,7 +45,7 @@ const internPrompt = () => {
     },
     {
       type: "input",
-      name: "Id",
+      name: "id",
       message: "Enter the intern's ID:",
     },
     {
@@ -85,21 +85,25 @@ const employeePrompt = () => {
       if (choice === "Add an intern") {
         return internPrompt()
         .then((internData) => {
-            console.log(internData);
+            const intern = new Intern(internData.name, internData.id, internData.email, internData.school);
+            employees.push(intern);
             if (internData.addMember) {
                 employeePrompt();
             }
+            console.log(employees);
         });
       } else if (choice === "Add an engineer") {
         return engineerPrompt()
-        .then((internData) => {
-            console.log(internData);
-            if (internData.addMember) {
+        .then((engineerData) => {
+            const engineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
+            employees.push(engineer);
+            if (engineerData.addMember) {
                 employeePrompt();
             }
+            console.log(employees);
         });
       } else {
-        return;
+        console.log(employees);
       }
     });
 };
@@ -115,7 +119,7 @@ const startApplication = () => {
       },
       {
         type: "input",
-        name: "ID",
+        name: "id",
         message: "Enter the managers's ID:",
       },
       {
