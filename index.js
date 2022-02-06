@@ -27,12 +27,12 @@ const engineerPrompt = () => {
       name: "github",
       message: "Enter the engineer's github username:",
     },
-    {
-      type: "confirm",
-      name: "addMember",
-      message: "Would you like to add another member to your team?",
-      default: false,
-    },
+    // {
+    //   type: "confirm",
+    //   name: "addMember",
+    //   message: "Would you like to add another member to your team?",
+    //   default: false,
+    // },
   ]);
 };
 
@@ -57,13 +57,7 @@ const internPrompt = () => {
       type: "input",
       name: "school",
       message: "Enter the intern's school:",
-    },
-    {
-      type: "confirm",
-      name: "addMember",
-      message: "Would you like to add another member to your team?",
-      default: false,
-    },
+    }
   ]);
 };
 
@@ -87,20 +81,14 @@ const employeePrompt = () => {
         .then((internData) => {
             const intern = new Intern(internData.name, internData.id, internData.email, internData.school);
             employees.push(intern);
-            if (internData.addMember) {
-                employeePrompt();
-            }
-            console.log(employees);
+            return employeePrompt();
         });
       } else if (choice === "Add an engineer") {
         return engineerPrompt()
         .then((engineerData) => {
             const engineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
             employees.push(engineer);
-            if (engineerData.addMember) {
-                employeePrompt();
-            }
-            console.log(employees);
+            return employeePrompt();
         });
       } else {
         console.log(employees);
