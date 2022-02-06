@@ -3,54 +3,66 @@ const Intern = require("./lib/Intern.js");
 const Engineer = require("./lib/Engineer");
 
 const engineerPrompt = () => {
-    return inquirer.prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "Enter the engineer's name:",
-      },
-      {
-        type: "input",
-        name: "ID",
-        message: "Enter the engineer's ID:",
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "Enter the engineer's email address:",
-      },
-      {
-        type: "input",
-        name: "github",
-        message: "Enter the engineer's github username:",
-      },
-    ]);
-  };
-  
-  const internPrompt = () => {
-    return inquirer.prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "Enter the intern's name:",
-      },
-      {
-        type: "input",
-        name: "ID",
-        message: "Enter the intern's ID:",
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "Enter the intern's email address:",
-      },
-      {
-        type: "input",
-        name: "school",
-        message: "Enter the intern's school:",
-      },
-    ]);
-  };
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter the engineer's name:",
+    },
+    {
+      type: "input",
+      name: "ID",
+      message: "Enter the engineer's ID:",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter the engineer's email address:",
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "Enter the engineer's github username:",
+    },
+    {
+      type: "confirm",
+      name: "add",
+      message: "Would you like to add another member to your team?",
+      default: false,
+    },
+  ]);
+};
+
+const internPrompt = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter the intern's name:",
+    },
+    {
+      type: "input",
+      name: "ID",
+      message: "Enter the intern's ID:",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter the intern's email address:",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "Enter the intern's school:",
+    },
+    {
+      type: "confirm",
+      name: "addMember",
+      message: "Would you like to add another member to your team?",
+      default: false,
+    },
+  ]);
+};
 
 const employeePrompt = () => {
   inquirer
@@ -59,48 +71,64 @@ const employeePrompt = () => {
         type: "list",
         name: "choice",
         message: "What do you want to do?",
-        choices: ["Add an intern", "Add an engineer", "Finish building out team"],
+        choices: [
+          "Add an intern",
+          "Add an engineer",
+          "Finish building out team",
+        ],
       },
     ])
     .then(({ choice }) => {
       if (choice === "Add an intern") {
-        internPrompt();
+        internPrompt()
+        .then((internData) => {
+            console.log(internData);
+            if (internData.addMember) {
+                employeePrompt();
+            }
+        });
       } else if (choice === "Add an engineer") {
-        engineerPrompt();
+        engineerPrompt()
+        .then((internData) => {
+            console.log(internData);
+            if (internData.addMember) {
+                employeePrompt();
+            }
+        });
       } else {
-          return;
+        return;
       }
     });
 };
 
 const startApplication = () => {
   // prompted to enter managers info at start of application
-  inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "Enter the managers's name:",
-    },
-    {
-      type: "input",
-      name: "ID",
-      message: "Enter the managers's ID:",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "Enter the manager's email address:",
-    },
-    {
-      type: "input",
-      name: "officeNumber",
-      message: "Enter the manager's office number:",
-    }
-  ])
-  .then(() => {
-    employeePrompt();
-  })
-
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Enter the managers's name:",
+      },
+      {
+        type: "input",
+        name: "ID",
+        message: "Enter the managers's ID:",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter the manager's email address:",
+      },
+      {
+        type: "input",
+        name: "officeNumber",
+        message: "Enter the manager's office number:",
+      },
+    ])
+    .then(() => {
+      employeePrompt();
+    });
 };
 
 startApplication();
