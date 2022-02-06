@@ -3,6 +3,8 @@ const Intern = require("./lib/Intern.js");
 const Engineer = require("./lib/Engineer.js");
 const Manager = require("./lib/Manager.js");
 
+const employees = [];
+
 const engineerPrompt = () => {
   return inquirer.prompt([
     {
@@ -27,7 +29,7 @@ const engineerPrompt = () => {
     },
     {
       type: "confirm",
-      name: "add",
+      name: "addMember",
       message: "Would you like to add another member to your team?",
       default: false,
     },
@@ -127,9 +129,12 @@ const startApplication = () => {
         message: "Enter the manager's office number:",
       },
     ])
-    .then(() => {
-      return employeePrompt();
-    });
+    .then((managersData) => {
+        const manager = new Manager(managersData.name, managersData.id, managersData.email, managersData.officeNumber);
+        employees.push(manager);
+        return employeePrompt();
+    })
 };
 
-startApplication();
+startApplication()
+
