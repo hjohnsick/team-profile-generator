@@ -2,6 +2,8 @@ const inquirer = require("inquirer");
 const Intern = require("./lib/Intern.js");
 const Engineer = require("./lib/Engineer.js");
 const Manager = require("./lib/Manager.js");
+const writeToFile = require("./utils/generate-site.js");
+const generateHTML = require("./src/page-template.js");
 
 const employees = [];
 
@@ -26,13 +28,7 @@ const engineerPrompt = () => {
       type: "input",
       name: "github",
       message: "Enter the engineer's github username:",
-    },
-    // {
-    //   type: "confirm",
-    //   name: "addMember",
-    //   message: "Would you like to add another member to your team?",
-    //   default: false,
-    // },
+    }
   ]);
 };
 
@@ -92,13 +88,17 @@ const employeePrompt = () => {
         });
       } else {
         console.log(employees);
+        return writeToFile('./dist/index.html', generateHTML(employees))
+        .then((response) => {
+            console.log(response);
+        })
       }
     });
 };
 
 const startApplication = () => {
   // prompted to enter managers info at start of application
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "input",
@@ -129,4 +129,6 @@ const startApplication = () => {
 };
 
 startApplication()
+
+
 
