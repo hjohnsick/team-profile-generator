@@ -1,13 +1,15 @@
 const generateCards = (employeesArr) => {
     return `
     <div>
-        ${employeesArr.map(({name, id, email}) => {
+        ${employeesArr.map((employee) => {
             return `
-            <h1>${name}</h1>
-            <h1>${id}</h1>
-            <h1>${email}</h1>
+            <h1>${employee.getName()}</h1>
+            <h1>${employee.getId()}</h1>
+            <h1>${employee.getEmail()}</h1>
+            <h1>${employee.getRole()}</h1>
             `
-        })}
+        })
+    .join('')}
     </div>
     `        
 };
