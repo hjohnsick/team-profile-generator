@@ -1,10 +1,10 @@
 const getJobInfo = (employee) => {
     if (employee.getRole() === "Manager") {
-        return `Office number: ${employee.getOfficeNumber()}`;
+        return `<p>Office number: ${employee.getOfficeNumber()}</p>`;
     } else if (employee.getRole() === "Intern") {
-        return `School: ${employee.getSchool()}`;
+        return `<p>School: ${employee.getSchool()}</p>`;
     } else if (employee.getRole() === "Engineer") {
-        return `GitHub: ${employee.getGithub()}`;
+        return `<p>GitHub: <a href="https://github.com/${employee.getGithub()}" target="_blank">https://github.com/${employee.getGithub()}</a></p>`;
     }  
 }
 
@@ -38,8 +38,8 @@ const generateCards = (employeesArr) => {
           </div>
           <div class="card-content">
             <p>ID: ${employee.getId()}</p>
-            <p>Email: ${employee.getEmail()}</p>
-            <p>${getJobInfo(employee)}</p>
+            <p>Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+            ${getJobInfo(employee)}
           </div>
         </div>
       </div>
