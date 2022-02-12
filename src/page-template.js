@@ -1,3 +1,13 @@
+const getJobInfo = (employee) => {
+    if (employee.getRole() === "Manager") {
+        return employee.getOfficeNumber();
+    } else if (employee.getRole() === "Intern") {
+        return employee.getSchool();
+    } else if (employee.getRole() === "Engineer") {
+        return employee.getGithub();
+    }  
+}
+
 const generateCards = (employeesArr) => {
     return `
     <div>
@@ -7,15 +17,14 @@ const generateCards = (employeesArr) => {
     <div class='columns is-mobile is-centered'>
       <div class='column is-5'>
         <div class="card">
-          <div class='card-header'>
-            <div class="card-header-title has-text-success">
-            <h1>${employee.getName()}</h1>
-            <h1>${employee.getRole()}</h1>
-            </div>
+          <div class='media-content'>
+            <h1 class="title is-3">${employee.getName()}</h1>
+            <h2 class="subtitle is-4">${employee.getRole()}</h2>
           </div>
           <div class="card-content">
-          <h1>${employee.getId()}</h1>
-          <h1>${employee.getEmail()}</h1>
+          <p>ID:${employee.getId()}</p>
+          <p>Email:${employee.getEmail()}</p>
+          <p>${getJobInfo(employee)}</p>
           </div>
         </div>
       </div>
