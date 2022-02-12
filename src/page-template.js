@@ -20,35 +20,35 @@ const getIcon = (employee) => {
 
 const generateCards = (employeesArr) => {
     return `
-    <div>
+    <section class="section">
+        <div class="container">
+            <div class='columns mt-5 is-8 is-variable is-centered'>
         ${employeesArr.map((employee) => {
             return `
-            <div class='container'>
-    <div class='columns is-mobile'>
-      <div class='column is-5'>
+      <div class='column is-4-tablet is-3-desktop'>
         <div class="card">
           <div class='media-content'>
             <h1 class="title is-3">${employee.getName()}</h1>
             <span class="icon-text">
-  <span class="icon">
-    ${getIcon(employee)}
-  </span>
-  <span class="subtitle is-4">${employee.getRole()}</span>
-</span>
+                <span class="icon">
+                    ${getIcon(employee)}
+                </span>
+                <span class="subtitle is-4">${employee.getRole()}</span>
+            </span>
           </div>
           <div class="card-content">
-          <p>ID: ${employee.getId()}</p>
-          <p>Email: ${employee.getEmail()}</p>
-          <p>${getJobInfo(employee)}</p>
+            <p>ID: ${employee.getId()}</p>
+            <p>Email: ${employee.getEmail()}</p>
+            <p>${getJobInfo(employee)}</p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
             `
         })
     .join('')}
-    </div>
+            </div>
+        </div>
+    </section>
     `        
 };
 
