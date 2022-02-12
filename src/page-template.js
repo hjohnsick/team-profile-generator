@@ -1,11 +1,21 @@
 const getJobInfo = (employee) => {
     if (employee.getRole() === "Manager") {
-        return employee.getOfficeNumber();
+        return `Office number: ${employee.getOfficeNumber()}`;
     } else if (employee.getRole() === "Intern") {
-        return employee.getSchool();
+        return `School: ${employee.getSchool()}`;
     } else if (employee.getRole() === "Engineer") {
-        return employee.getGithub();
+        return `GitHub: ${employee.getGithub()}`;
     }  
+}
+
+const getIcon = (employee) => {
+    if (employee.getRole() === "Manager") {
+        return `<i class="fa fa-solid fa-user-tie"></i>`;
+    } else if (employee.getRole() === "Intern") {
+        return `<i class="fa fa-solid fa-user-graduate"></i>`;
+    } else if (employee.getRole() === "Engineer") {
+        return `<i class="fa fa-solid fa-laptop-code"></i>`;
+    } 
 }
 
 const generateCards = (employeesArr) => {
@@ -13,17 +23,22 @@ const generateCards = (employeesArr) => {
     <div>
         ${employeesArr.map((employee) => {
             return `
-            <div class='container has-text-centered'>
-    <div class='columns is-mobile is-centered'>
+            <div class='container'>
+    <div class='columns is-mobile'>
       <div class='column is-5'>
         <div class="card">
           <div class='media-content'>
             <h1 class="title is-3">${employee.getName()}</h1>
-            <h2 class="subtitle is-4">${employee.getRole()}</h2>
+            <span class="icon-text">
+  <span class="icon">
+    ${getIcon(employee)}
+  </span>
+  <span class="subtitle is-4">${employee.getRole()}</span>
+</span>
           </div>
           <div class="card-content">
-          <p>ID:${employee.getId()}</p>
-          <p>Email:${employee.getEmail()}</p>
+          <p>ID: ${employee.getId()}</p>
+          <p>Email: ${employee.getEmail()}</p>
           <p>${getJobInfo(employee)}</p>
           </div>
         </div>
@@ -48,9 +63,10 @@ const generateHTML = (employeesArr) => {
         <title>Team Profile</title>
         <link rel='stylesheet' href=
     'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     </head>
     <div>
-        <h1>My Team</h1>
+        <h1 class="title is-1 has-text-centered">My Team</h1>
     </div>
     <body>
         <div>
