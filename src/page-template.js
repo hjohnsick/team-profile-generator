@@ -22,10 +22,10 @@ const generateCards = (employeesArr) => {
     return `
     <section class="section">
         <div class="container">
-            <div class='columns mt-5 is-8 is-variable is-centered'>
+            <div class='columns mt-5 is-8 is-variable is-centered is-multiline'>
         ${employeesArr.map((employee) => {
             return `
-      <div class='column is-4-tablet is-3-desktop'>
+      <div class='column is-two-thirds-tablet is-one-third-desktop'>
         <div class="card">
           <div class='media-content'>
             <h1 class="title is-3">${employee.getName()}</h1>
